@@ -4,13 +4,22 @@ public class Task1
     //0.5 балла - если посчитаете в цикле
     //1 балл - если посчитаете рекурсией
     public static int fact(int n){
+        if (n == 1) return 1;
+        n = n * fact(n - 1);
         return n;
     }
 
     //вывести таблицу умножения на экран - 1 балл
     //подсказка - использовать двойной for
     public static void table(){
-        //Ваше решение здесь
+        for(int i=1; i<10; i++) {
+            for(int j=1; j<10; j++) {
+                if (i * j <= 9) System.out.print(' ');
+                System.out.print(i * j);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
     }
 
     //посчитать сумму цифр числа
@@ -19,7 +28,12 @@ public class Task1
     //подсказка - в случае для любого числа используйте while
     public static int sum(int n){
         //Ваше решение здесь
-        return n;
+        int s = 0;
+        while (n > 0) {
+            s = s + n % 10;
+            n = n / 10;
+        }
+        return s;
     }
 
     //определить, является ли год високосным
@@ -31,7 +45,14 @@ public class Task1
     //за правильный ответ - 0.5 балла
     public static boolean isLeapYear(int year) {
         //Ваше решение здесь
-        return true;
+        if (year % 100 == 0) {
+            if (year % 400 == 0) return true;
+            else return false;
+        }
+        else {
+            if (year % 4 == 0) return true;
+            else return false;
+        }
     }
 
     //здесь вам нужно будет использовать результат прошлой задачи
@@ -39,11 +60,10 @@ public class Task1
     //правильный ответ - 0.5 балла
     public static int daysInYear(int year) {
         if (isLeapYear(year)){
-            //
+            return 366;
         } else {
-            //
+            return 365;
         }
-        return 0;
     }
 
     //определить номер дня недели по строке
@@ -51,6 +71,13 @@ public class Task1
     //правильный ответ - 1 балл
     public static int dayOfTheWeek(String n){
         //Ваше решение здесь
+        if (n == "Понедельник") return 1;
+        if (n == "Вторник") return 2;
+        if (n == "Среда") return 3;
+        if (n == "Четверг") return 4;
+        if (n == "Пятница") return 5;
+        if (n == "Суббота") return 6;
+        if (n == "Воскресенье") return 7;
         return 0;
     }
 
@@ -58,6 +85,14 @@ public class Task1
     //правильное решение - 0.5 балла
     public static void printArray(int[] array){
         //Ваше решение здесь
+        boolean isFirst = true;
+        System.out.print('[');
+        for (int elem: array){
+            if (isFirst) isFirst = false;
+            else System.out.print(", ");
+            System.out.print(elem);
+        }
+        System.out.println(']');
     }
 
     //вывести двойной массив на экран в виде:
@@ -67,6 +102,7 @@ public class Task1
     //правильное решение - 0.5 балла
     public static void printArray(int[][] array){
         //Ваше решение здесь
+        for (int[] elem: array) printArray(elem);
     }
 
     //отсортировать одномерный массив в порядке возрастания
@@ -75,6 +111,14 @@ public class Task1
     //правильный ответ - 1 балл
     public static int[] sort(int[] array){
         //Ваше решение здесь
+        int tmp;
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] > array[j]) {
+                    tmp = array[i]; array[i] = array[j]; array[j] = tmp;
+                }
+            }
+        }
         return array;
     }
 
@@ -101,7 +145,7 @@ public class Task1
         printArray(sort(array1D));
 
         System.out.println("Вывод двумерного массива:");
-        int[][] array2D = {{1,5,3,7,10,2,5}, {1,5,3,7,10,2,5}};
+        int[][] array2D = {{1,5,3,7,10,2,5}, {1,5,3,8,10,2,6}};
         printArray(array2D);
     }
 }
